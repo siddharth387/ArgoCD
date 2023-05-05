@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nginx.deployment.name }}
+  namespace: {{ include "nginx.namespace" . }}
+spec:
+  selector:
+   {{- with .Values.nginx.labels }}
+    matchLabels:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+  replicas: {{ .Values.nginx.deployment.replicaCount }} # tells deployment to run no. pods matching the template
+  template:
+    metadata:
+      {{- with .Values.nginx.labels }}
+      labels:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      containers:
+        - name: {{ .Values.nginx.deployment.containers_name }}
+          image: {{ .Values.nginx.deployment.image.repository }}:{{ .Values.nginx.deployment.image.tag }}
+          imagePullPolicy: {{ .Values.nginx.deployment.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.nginx.deployment.containerPort }}
