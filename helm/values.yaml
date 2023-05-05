@@ -1,0 +1,25 @@
+# Default values for metix-remote.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+# Default values for metix-remote.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+namespace: nginx
+nginx:
+  labels:
+    app: nginx
+  deployment:
+    name: nginx-deployment
+    replicaCount: 1
+    containers_name: nginx
+    image:
+      repository: nginx
+      pullPolicy: IfNotPresent
+      tag: "1.14.2"
+    containerPort: 80
+
+  service:
+    name: nginx-service
+    type: NodePort
+    port: 80
+    targetPort: 80
