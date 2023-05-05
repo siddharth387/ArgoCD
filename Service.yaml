@@ -1,12 +1,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-app-service
+  creationTimestamp: "2023-05-05T11:16:46Z"
   labels:
-    run: nginx-app-service
+    app: sidhantrt
+  name: sidhantrt
+  namespace: default
+  resourceVersion: "1039801"
+  uid: f94162d9-1110-406d-b4bb-1c46524a2309
 spec:
+  clusterIP: 10.105.179.54
+  clusterIPs:
+  - 10.105.179.54
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
-  - port: 80
+  - nodePort: 32183
+    port: 80
     protocol: TCP
+    targetPort: 80
   selector:
-    run: nginx-app
+    app: sidhantrt
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
