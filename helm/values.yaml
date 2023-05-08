@@ -10,7 +10,7 @@ nginx:
     app: nginx
   deployment:
     name: nginx-deployment
-    replicaCount: 3
+    replicaCount: 4
     containers_name: nginx
     image:
       repository: nginx
